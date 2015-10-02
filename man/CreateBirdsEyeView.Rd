@@ -9,7 +9,7 @@ CreateBirdsEyeView(data, colors = NULL)
 \arguments{
 \item{data}{A character matrix}
 
-\item{colors}{A vector of colors}
+\item{colors}{A vector of colors, with colnames matching states}
 }
 \value{
 TRUE if the plotting worked
