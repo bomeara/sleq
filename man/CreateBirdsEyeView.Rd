@@ -11,9 +11,6 @@ CreateBirdsEyeView(data, colors = NULL)
 
 \item{colors}{A vector of colors, with colnames matching states}
 }
-\value{
-TRUE if the plotting worked
-}
 \description{
 Create a birds' eye view of the data
 }

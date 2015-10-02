@@ -1,7 +1,6 @@
 #' Create a birds' eye view of the data
 #' @param data A character matrix
 #' @param colors A vector of colors, with colnames matching states
-#' @return TRUE if the plotting worked
 #' @examples
 #' \dontrun{
 #' test.sequences <- as.matrix(read.alignment(file = system.file("sequences/test.phylip",
@@ -21,5 +20,4 @@ CreateBirdsEyeView <- function(data, colors=NULL) {
     	rect(xleft=-.5+character, ybottom=-.45-taxon, xright=0.5+character, ytop=.45-taxon, col=colors[data[taxon,character]], border=NA)
     }
   }
-  return(TRUE)
 }
