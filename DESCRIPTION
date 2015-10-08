@@ -1,8 +1,8 @@
 Package: sleq
 Version: 0.1
-Date: 2015-10-01
+Date: 2015-10-08
 Title: sleq
-Author: Brian O'Meara <omeara.brian@gmail.com> and LABMATES TO LIST SOON
+Author: LABMATES TO LIST SOON Brian O'Meara <omeara.brian@gmail.com>
 Maintainer: Brian O'Meara <omeara.brian@gmail.com>
 Imports: ape, seqinr, data.table
 Description: Utilities for dealing with sequence data, especially for phylogenetics
