@@ -5,6 +5,6 @@ Title: sleq
 Author: LABMATES TO LIST SOON Brian O'Meara <omeara.brian@gmail.com>
 Maintainer: Brian O'Meara <omeara.brian@gmail.com>
 Imports: ape, seqinr
-Description: Utilities for dealing with sequence data, especially for phylogenetics
+Description: Utilities for dealing with sequence data, especially for phylogenetics.
 License: GPL (>= 2)
 Suggests: testthat
