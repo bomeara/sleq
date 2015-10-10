@@ -8,6 +8,7 @@
 #' However, one cool thing about this class is that if you use \code{[]} to access elements,
 #' this returns elements from within the \code{$sequences} object, not the class object itself.
 #' @examples 
+#' library(ape)
 #' data(woodmouse)
 #' mice.raw <- as.character(woodmouse)
 #' print(mice.raw[1:3, 1:20]
