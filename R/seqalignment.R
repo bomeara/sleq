@@ -11,7 +11,7 @@
 #' library(ape)
 #' data(woodmouse)
 #' mice.raw <- as.character(woodmouse)
-#' print(mice.raw[1:3, 1:20]
+#' print(mice.raw[1:3, 1:20])
 #' mice.seqalignment <- seqalignment(mice)
 #' print(mice.seqalignment[1:3, 1:20])
 #' print(mice.seqalignment$type)
