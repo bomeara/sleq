@@ -23,9 +23,10 @@ However, one cool thing about this class is that if you use \code{[]} to access 
 this returns elements from within the \code{$sequences} object, not the class object itself.
 }
 \examples{
+library(ape)
 data(woodmouse)
 mice.raw <- as.character(woodmouse)
-print(mice.raw[1:3, 1:20]
+print(mice.raw[1:3, 1:20])
 mice.seqalignment <- seqalignment(mice)
 print(mice.seqalignment[1:3, 1:20])
 print(mice.seqalignment$type)
