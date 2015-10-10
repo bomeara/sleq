@@ -12,3 +12,7 @@ This will be developed at an inhouse hackathon on Oct. 12, 2015. A secondary obj
 * We may try using Gitter for communication during the hackathon (though we'll all be in the same room, it can be less distracting than shouting "Hey, you!"). Connect [here](https://gitter.im/bomeara/omearalabpublic?utm_source=share-link&utm_medium=link&utm_campaign=share-link). Note that it is **public**: this makes it easier to join, but make sure you don't say anything you don't want everyone to see.
 * We are using a shared github repo (here!). Note that if you submit new code by doing pull requests, you can get a [free, geeky t-shirt](https://hacktoberfest.digitalocean.com/)
 * Lab members: before we start, get a github account. I advise using a permanent email address (UT will kick you out after you leave).
+
+Some notable features of the ```sleq``` package:
+* Sequences are stored as character matrices, thus easy to subset.
+* However, we also have a ```seqalignment``` class. It can be indexed using ```[]``` as with a character matrix, but actually stores this internally. The object also has info about gene locations and sequence type.
