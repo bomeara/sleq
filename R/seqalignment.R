@@ -1,6 +1,19 @@
 #' Create seqalignment class object
 #' @param x A character matrix
 #' @return A seqalignment object
+#' @details
+#' This class is, internally, a list containing character matrix \code{$sequences},
+#' \code{$type} (a guess at what kind of sequence it is: dna, rna, or aa), and 
+#' \code{$genes} (a character vector with labels for the genes; initialized at "1" for all.
+#' However, one cool thing about this class is that if you use \code{[]} to access elements,
+#' this returns elements from within the \code{$sequences} object, not the class object itself.
+#' @examples 
+#' data(woodmouse)
+#' mice.raw <- as.character(woodmouse)
+#' print(mice.raw[1:3, 1:20]
+#' mice.seqalignment <- seqalignment(mice)
+#' print(mice.seqalignment[1:3, 1:20])
+#' print(mice.seqalignment$type)
 seqalignment <- function(x) {
   return(structure(
     list(
@@ -25,15 +38,15 @@ GetSequenceType <- function(x) {
 		seq.type <- "dna"
 	} else if (all(states %in% c("a", "c", "g", "u", "-", " ", "r", "y", "s", "w", "k", "m", "b", "d", "h", "v", "n"))) {
 		seq.type <- "rna"
-	} else if (all(states %in% c("a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z", "-"))) {
+	} else if (all(states %in% c("a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z", "-", '*'))) {
 		seq.type <- "aa"
 	}
 	return(seq.type)
 }
 
 
-#Trying to override [] to go directly into the sequences. not working yet
-# [.seqalignment <- function(x, ...) {
-	# return(x$sequences[...])
-# }
+#' Using the bracket operator to go into the sequences inside a seqalignment
+ '[.seqalignment' <- function(x, ...) {
+	 return(x$sequences[...])
+ }
 
