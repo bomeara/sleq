@@ -12,7 +12,7 @@
 #' data(woodmouse)
 #' mice.raw <- as.character(woodmouse)
 #' print(mice.raw[1:3, 1:20])
-#' mice.seqalignment <- seqalignment(mice)
+#' mice.seqalignment <- seqalignment(mice.raw)
 #' print(mice.seqalignment[1:3, 1:20])
 #' print(mice.seqalignment$type)
 seqalignment <- function(x) {
@@ -47,6 +47,8 @@ GetSequenceType <- function(x) {
 
 
 #' Using the bracket operator to go into the sequences inside a seqalignment
+#' @param x A seqalignment object
+#' @param ... The argument you pass to brackets
  '[.seqalignment' <- function(x, ...) {
 	 return(x$sequences[...])
  }

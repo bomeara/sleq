@@ -6,6 +6,11 @@
 \usage{
 \method{[}{seqalignment}(x, ...)
 }
+\arguments{
+\item{x}{A seqalignment object}
+
+\item{...}{The argument you pass to brackets}
+}
 \description{
 Using the bracket operator to go into the sequences inside a seqalignment
 }
