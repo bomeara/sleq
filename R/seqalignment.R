@@ -19,8 +19,9 @@ seqalignment <- function(x) {
   return(structure(
     list(
       sequences=x, 
-      type=GetSequenceType(x),
-      genes=rep("1", dim(x)[2])
+      type=rep(GetSequenceType(x), dim(x)[2]),
+      genes=rep("1", dim(x)[2]),
+      pos=rep(NA, dim(x)[2])
     )
     , class="seqalignment")
   )
@@ -53,3 +54,16 @@ GetSequenceType <- function(x) {
 	 return(x$sequences[...])
  }
 
+#' Override dim() for a seqalignment object to get dim of the sequences
+#' @param x A seqalignment object
+#' @return The output of dim on \code{$sequences}
+dim.seqalignment <- function(x) {
+	return(dim(x$sequences))	
+}
+
+#' Override names() for seqaligment object
+#' @param x A seqalignment object
+#' @return The output of rownames on \code{$sequences}
+'names.seqalignment' <- function(x) {
+	return(rownames(x$sequences))
+}
