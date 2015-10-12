@@ -1,10 +1,3 @@
-
-
-#requires#
-#library(zoo)
-
-mice.seqalignment
-
 CountBasesAtSite <- function(x) {
   length(unique(x))
 }
@@ -50,6 +43,37 @@ PurgeBadSites <- function(sequences, width=6, threshold=4) {
   return(final.matrix)
 }
 
+#######do it for multiple genes#########
+#if by gene, perform for every gene by gene, otherwise slide over whole alignment
+#default is TRUE as if concat. alignment, then it is like one gene
+#for every gene, go through sliding window and identify bad sites
+#remove bad sites and store in appendable object the good sites
+
+PurgeBadSites <- function(sequences, width=6, threshold=4, by.gene=TRUE) {
+  if (by.gene==TRUE){
+    vec<-vector()
+    for(i in sequence(sequences$genes)){
+      bad.sites <- IdentifyBadSites(sequences[i], width, threshold)
+      final.matrix <- sequences
+      vec<-append(vec, bad.sites)
+      if(length(bad.sites)>0) {
+        final.matrix <- sequences[,-bad.sites]
+      }
+    }
+    return(final.matrix)
+  }
+  
+  else{
+    bad.sites <- IdentifyBadSites(sequences, width, threshold)
+    final.matrix <- sequences
+    if(length(bad.sites)>0) {
+      final.matrix <- sequences[,-bad.sites]
+    }
+  }
+  return(final.matrix)
+}
+
+PurgeBadSites(mice.seqalignment$sequences, width=6, threshold=2, by.gene=FALSE)
 
 
 
