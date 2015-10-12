@@ -61,3 +61,9 @@ dim.seqalignment <- function(x) {
 	return(dim(x$sequences))	
 }
 
+#' Override names() for seqaligment object
+#' @param x A seqalignment object
+#' @return The output of rownames on \code{$sequences}
+'names.seqalignment' <- function(x) {
+	return(rownames(x$sequences))
+}

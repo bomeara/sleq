@@ -16,8 +16,8 @@ raw.sequences <- structure(c("a", "a", "a", "a", "a", "a", "a", "c", "a", "a",
 "c", "g", "c", "g", "a", "g", "g", "g", "g", "c", "c", "g", "g", 
 "g", "t", "t", "t", "t", "t", "c", "t", "a", "a", "a", "a", "a", 
 "t", "t", "a", "t", "a"), .Dim = c(5L, 42L), .Dimnames = list(
-    c("Turkey    ", "Salmo gair", "H. Sapiens", "Chimp     ", 
-    "Gorilla   "), c("1", "2", "3", "4", "5", "6", "7", "8", 
+    c("Turkey", "Salmo gair", "H. Sapiens", "Chimp", 
+    "Gorilla"), c("1", "2", "3", "4", "5", "6", "7", "8", 
     "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", 
     "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", 
     "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", 
@@ -29,6 +29,11 @@ raw.sequences <- structure(c("a", "a", "a", "a", "a", "a", "a", "c", "a", "a",
     expect_match(class(new.format.sequences$genes), "character")
     expect_equal(dim(new.format.sequences)[1], 5)
     expect_match(class(new.format.sequences), "seqalignment")
+    raw.names <- sort(rownames(raw.sequences))
+    new.names <- sort(names(new.format.sequences))
+	for (i in sequence(length(raw.names))) {
+		expect_equal(raw.names[i], new.names[i])	
+	} 
 })
 
 test_that("seqalignment type is detected properly", {
