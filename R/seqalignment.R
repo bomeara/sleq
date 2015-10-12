@@ -53,6 +53,65 @@ GetSequenceType <- function(x) {
  '[.seqalignment' <- function(x, ...) {
 	 return(x$sequences[...])
  }
+ 
+#' Get a subset of a seqalignment object, returning another seqalignment object
+#' @param keep.site A vector of site positions to retain
+#' @param kill.site A vector of site positions to delete
+#' @param keep.taxon A vector of taxa (names or numbers) to retain
+#' @param kill.taxon A vector of taxa (names or numbers) to delete
+#' @param gene A vector of genes to retain
+#' @param pos A vector of codon positions to retain
+#' @param type A vector of types to retain
+#' @return A seqalignment object
+#' @details
+#' This will only filter on those arguments passed in: if you give it a list of keep.sites, it will include
+#' all taxa, for example. You can filter on more than one feature at a time. The keep.* or kill.* arguments
+#' let you filter for sites or taxa to keep or remove.
+ subset.seqalignment <- function(x, keep.site=NULL, kill.site=NULL, keep.taxon=NULL, kill.taxon=NULL, gene=NULL, pos=NULL, type=NULL) {
+ 	cols.to.kill <- c()
+ 	if (!is.null(kill.site)) {
+ 		cols.to.kill <- c(cols.to.kill, kill.site)	
+ 	}
+ 	if (!is.null(gene)) {
+ 		cols.to.kill <- c(cols.to.kill, which(!(x$gene %in% gene)))
+ 	}
+ 	if (!is.null(pos)) {
+ 		cols.to.kill <- c(cols.to.kill, which(!(x$pos %in% pos)))
+ 	}
+ 	if (!is.null(type)) {
+ 		cols.to.kill <- c(cols.to.kill, which(!(x$type %in% type)))
+ 	}
+  	if (!is.null(keep.site)) {
+ 		cols.to.kill <- c(cols.to.kill, which(!(sequence(dim(x$sequences)[2]) %in% keep.site)))	
+ 	}
+	cols.to.kill <- unique(cols.to.kill)
+	if(length(cols.to.kill) > 0) {
+		x$sequences <- x$sequences[,-cols.to.kill]
+		x$genes <- 	x$genes[-cols.to.kill]
+		x$type <- 	x$type[-cols.to.kill]
+		x$pos <- 	x$pos[-cols.to.kill]
+	}
+	rows.to.kill <- c()
+	if(!is.null(kill.taxon)) {
+		if(is.numeric(kill.taxon)) {
+			rows.to.kill <- kill.taxon	
+		} else {
+			rows.to.kill <- which(rownames(x$sequences) %in% kill.taxon)	
+		}
+	}
+	if(!is.null(keep.taxon)) {
+		if(is.numeric(keep.taxon)) {
+			rows.to.kill <- which(!(sequence(dim(x$sequences)[1]) %in% keep.taxon))
+		} else {
+			rows.to.kill <- which(!(rownames(x$sequences) %in% keep.taxon))
+		}	
+	}
+	rows.to.kill <- unique(rows.to.kill)
+	if(length(rows.to.kill)>0) {
+		x$sequences <- x$sequences[-rows.to.kill,]	
+	}
+	return(x)
+ }
 
 #' Override dim() for a seqalignment object to get dim of the sequences
 #' @param x A seqalignment object
