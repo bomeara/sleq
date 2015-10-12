@@ -24,8 +24,10 @@ raw.sequences <- structure(c("a", "a", "a", "a", "a", "a", "a", "c", "a", "a",
     "39", "40", "41", "42")))
     new.format.sequences <- seqalignment(raw.sequences)
     expect_match(new.format.sequences[1,1], raw.sequences[1,1])
-    expect_match(new.format.sequences$type, "dna")
+    expect_match(unique(new.format.sequences$type), "dna")
+    expect_equal(new.format.sequences$pos, rep(NA,42))
     expect_match(class(new.format.sequences$genes), "character")
+    expect_equal(dim(new.format.sequences)[1], 5)
     expect_match(class(new.format.sequences), "seqalignment")
 })
 
