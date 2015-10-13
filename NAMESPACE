@@ -1,4 +1,4 @@
 exportPattern("^[^\\.]")
-importFrom(seqinr, read.alignment)
+importFrom(seqinr, read.alignment, translate)
 importFrom(zoo, rollapply)
 import(ape)

@@ -10,7 +10,8 @@
 #' @param \code{numcode} The NCBI genetic code number used for translation. By default, the standard genetic code (1) is used. 
 #' See NCBI Genetic Code website for more details: \url{http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode=t}
 #' @param \code{NAstring} How to treat the translation of amino acids when there are ambiguous bases in codons. 
-#' @param \code{ambiguous} Indicate whether amibiguous bases are considered. Set as FALSE as a default.  #' 
+#' @param \code{ambiguous} Indicate whether ambiguous bases are considered. Set as FALSE as a default.   
+#' @param \code{return.all} In case of multiple equally good phases, return all (TRUE, the default) or just one at random.
 #' @details 
 #' \code{numStopCodons} integer list of the total number of stop codons in each of the six codon phases. 
 #' \code{stopCodonPositions} character list of the beginning position for every stop codon found within each of the six codon phases. 
@@ -34,8 +35,9 @@
 #' # Get consensus
 #' Anouk <- consensus(sample.fasta, method = "majority")
 #' }
-GetCodonPhase <- function(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALSE){
+GetCodonPhase <- function(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALSE, return.all=TRUE){
 	stopPosList<-list()
+	stopPosCounts <- rep(NA, 6)
 	translationList<-list()
 	frame<-c(0:2)
 	sens<-c("F","R")
@@ -45,26 +47,29 @@ GetCodonPhase <- function(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALS
 				numcode=numcode, NAstring=NAstring, ambiguous = ambiguous)
 			stopPos<-grep("\\*",result)
 			if(length(stopPos) == 0){
-				stopPosList[[length(stopPosList) + 1]] <- 0
+				stopPosList[[length(stopPosList) + 1]] <- "" #doing zero here counts it as a stop codon below
 			}else{
 				stopPosList[[length(stopPosList) + 1]]<-stopPos
 			}
+			stopPosCounts[length(stopPosList)] <- length(stopPos)
 			names(stopPosList)[[length(stopPosList)]]<-paste((frame.num + 1),"-",sens[sens.num],sep="")
 			translationList[[length(translationList) + 1]]<-result
 		}
 	}	
-	numCodons<-lapply(stopPosList,length)
-	numCodons<-unlist(numCodons)	
-	minVal<-which.min(numCodons)
-	numMin<-which(numCodons == minVal)
-	if(length(numMin) > 1){
+
+	indexMin <- which(stopPosCounts==min(stopPosCounts))
+	if(!return.all) {
+		indexMin <- sample(indexMin, 1)	
+	}
+	if(length(indexMin) > 1){
 		translation<-list()
-		for(phase in numMin){
+		for(phase.index in sequence(length(indexMin))){
+			phase <- indexMin[phase.index]
 			translation[[length(translation) + 1]] <- translationList[[phase]]
 			names(translation)[[length(translation)]]<-names(numCodons[phase])
 		}
 	}else{
-		translation<-translationList[[which.min(numCodons)]]
+		translation<-translationList[[indexMin]]
 	}
 	
 	return(list("NumStopCodons"=numCodons,"stopCodonPostions"=stopPosList,
