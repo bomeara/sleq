@@ -20,7 +20,8 @@ test_that("GetCodonPhase is calculating the number of stop codons correctly", {
   expect_equal(length(output$stopCodonPostions), 6)
   expect_equal(min(output$NumStopCodons), 0)
   expect_equal(max(output$NumStopCodons), 2)
-  expect_equal(length(output$translation), 70)
+  expect_less_than(length(output$translation), 71) #the length of the translation can vary depending on where you start the codon
+  expect_more_than(length(output$translation), 68)
   expect_match(class(output), "list")
   output2 <- GetCodonPhase(consensusSequence, return.all=TRUE)
   expect_equal(length(output2$translation),2)

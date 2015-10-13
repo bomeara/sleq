@@ -66,12 +66,12 @@ GetCodonPhase <- function(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALS
 		for(phase.index in sequence(length(indexMin))){
 			phase <- indexMin[phase.index]
 			translation[[length(translation) + 1]] <- translationList[[phase]]
-			names(translation)[[length(translation)]]<-names(numCodons[phase])
+			names(translation)[[length(translation)]]<-names(stopPosList[phase])
 		}
 	}else{
 		translation<-translationList[[indexMin]]
 	}
 	
-	return(list("NumStopCodons"=numCodons,"stopCodonPostions"=stopPosList,
+	return(list("NumStopCodons"= stopPosCounts,"stopCodonPostions"=stopPosList,
 		"translation"=translation))
 }
