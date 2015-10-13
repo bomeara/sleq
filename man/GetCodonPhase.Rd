@@ -8,7 +8,7 @@ GetCodonPhase(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALSE)
 }
 \arguments{
 \item{DNA.seq}{Vector of the consensus alignment of a DNA sequence. }
-\item{numcode}{The NCBI genetic code number used for translation. By default, the standard genetic code (1) is used.}
+\item{numcode}{The NCBI genetic code number used for translation. By default, the standard genetic code (1) is used. See NCBI Genetic Code website for details: \url{http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode=t}}
 \item{NAstring}{How to treat the translation of amino acids when there are ambiguous bases in codons.}
 \item{ambiguous}{Indicate whether amibiguous bases are considered. Set as FALSE as a default.}
 }
