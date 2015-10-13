@@ -14,7 +14,9 @@ See NCBI Genetic Code website for more details: \url{http://www.ncbi.nlm.nih.gov
 
 \item{\code{NAstring}}{How to treat the translation of amino acids when there are ambiguous bases in codons.}
 
-\item{\code{ambiguous}}{Indicate whether amibiguous bases are considered. Set as FALSE as a default.  #'}
+\item{\code{ambiguous}}{Indicate whether ambiguous bases are considered. Set as FALSE as a default.}
+
+\item{\code{return.all}}{In case of multiple equally good phases, return all (TRUE, the default) or just one at random.}
 }
 \description{
 \code{GetCodonPhase} determines the best translated amino acid sequence from a consensus DNA alignment by identifying the codon phase that produces the fewest number of stop codons. \code{translate} from the seqinr package is used to determine the positions of the stop codons in the consensus alignment in all three forward and three reverse codon phases, for a total of six codon phases.
