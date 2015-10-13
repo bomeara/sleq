@@ -1,7 +1,7 @@
 # Other example Latrodectus hesperus 
 accession.number<-c("KP656931","DQ127326","KP656707","KC414081","KC414080")
 library(ape)
-source("~/Dropbox/sleq/R/SingleTaxonCompare.R")
+#source("~/Dropbox/sleq/R/SingleTaxonCompare.R")
 seqs.onespecies<- read.GenBank(access.nb=accession.number, species.names=TRUE,gene.names=TRUE, as.character=TRUE)
 
 seqs.onespeciesv2<- read.GenBank(access.nb=accession.number, species.names=TRUE,gene.names=TRUE, as.character=FALSE)
