@@ -6,7 +6,7 @@
 library(ape) 
 data(woodmouse)
 mice.raw<-as.character(woodmouse)
-source("seqalignment.R")
+#source("seqalignment.R")
 mice.seqalignment<-seqalignment(mice.raw)
 
 sequence.example1<- mice.seqalignment$sequences[,c(12,14,30,960,963)]
