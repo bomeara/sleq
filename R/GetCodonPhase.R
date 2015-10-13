@@ -1,3 +1,41 @@
+#' @title Determine the best codon phase and return amino acid sequence
+#' 
+#' @name GetCodonPhase
+#' 
+#' @description \code{GetCodonPhase} determines the best translated amino acid sequence from a consensus DNA alignment by identifying the codon phase that produces the fewest number of stop codons. \code{translate} from the \link[seqinr] package is used to determine the positions of the stop codons in the consensus alignment in all three forward and three reverse codon phases, for a total of six codon phases. 
+#' 
+#' @usage GetCodonPhase(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALSE)
+#' 
+#' @param \code{DNA.seq} Vector of the consensus alignment of a DNA sequence. 
+#' @param \code{numcode} The NCBI genetic code number used for translation. By default, the standard genetic code (1) is used. See NCBI Genetic Code website for more details: \url{http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode=t}}
+#' @param \code{NAstring} How to treat the translation of amino acids when there are ambiguous bases in codons. 
+#' @param \code{ambiguous} Indicate whether amibiguous bases are considered. Set as FALSE as a default.  #' 
+#' @details 
+#' \code{numStopCodons} integer list of the total number of stop codons in each of the six codon phases. 
+#' \code{stopCodonPositions} character list of the beginning position for every stop codon found within each of the six codon phases. 
+#' \code{translation} vector of the amino acid sequence from the codon phase with the fewest number of stop codons. 
+#' 
+#' @seealso \code{\link[seqinr]{translate}}
+#' 
+#' @examples 
+#' \dontrun{
+#' library(sleq)
+#' 
+#' malMfile <- system.file("sequences/malM.fasta", package = "seqinr")
+#' malMseq <- read.fasta(malMfile)
+#' 
+#' # DNA sequence is stored under the 
+#' malMtest <- GetCodonPhase(as.character(malMseq[[1]]))
+#' 
+#' ### Example using multiple sequences, and then creating a consensus alignment
+# Load in sample alignment
+#' fastaf <- system.file("sequences/Anouk.fasta", package = "seqinr")
+#' sample.fasta <- read.alignment(file = system.file("sequences/Anouk.fasta", package = "seqinr"), format = "fasta")
+#'
+#' # Get consensus
+#' Anouk <- consensus(sample.fasta, method = "majority")
+
+#' }
 
 GetCodonPhase <- function(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALSE){
 	stopPosList<-list()
