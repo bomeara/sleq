@@ -25,3 +25,4 @@ test_that("GetCodonPhase is calculating the number of stop codons correctly", {
 })
 
 
+
