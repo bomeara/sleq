@@ -27,10 +27,9 @@
 
 library(ape)
 
-mdls.routine <- function(gene.names, subtrees.filename=NULL){
+MdlsHeuristic <- function(gene.names, subtrees.set){
 	cat("Initializing...", "\n")
 	system("mkdir mdls_files")
-	subtree.set <- read.tree(subtrees.filename)
 	while(length(gene.names) > 2){
 		pairwise.comp <- t(combn(1:length(gene.names), 2))
 		for(i in 1:dim(pairwise.comp)[1]){
@@ -42,12 +41,10 @@ mdls.routine <- function(gene.names, subtrees.filename=NULL){
 			write.tree(new.set1, file=paste("mdls_files/", gene.names[pairwise.comp[i,1]], "_", gene.names[pairwise.comp[i,2]], ".tre", sep=""))
 			write.tree(new.set2, file=paste("mdls_files/", gene.names[pairwise.comp[i,1]], "_", gene.names[pairwise.comp[i,2]], ".tre", sep=""), append=TRUE)
 		}
-		
 		paired.subsets <- system(paste("ls -1 ", "mdls_files/", "*.tre", sep=""), intern=TRUE)
 		for(j in 1:length(paired.subsets)){
 			system(paste("./mdls.pl", paired.subsets[j], ">", paste(paired.subsets[j], ".out", sep="")))
 		}
-		
 		retained.taxa.list <- c()
 		paired.subsets.out <- system(paste("ls -1 ", "mdls_files/", "*.out", sep=""), intern=TRUE)
 		for(k in 1:length(paired.subsets.out)){
@@ -55,7 +52,6 @@ mdls.routine <- function(gene.names, subtrees.filename=NULL){
 			split.tmp <- unlist(strsplit(tmp[grep("Solution*", tmp)], " "))
 			retained.taxa.list <- rbind(retained.taxa.list, as.numeric(split.tmp[4]))
 		}
-		
 		largest.taxon.set <- which.max(retained.taxa.list)
 		tmp <- readLines(paired.subsets.out[largest.taxon.set])
 		solution.line = grep("Solution*", tmp)
