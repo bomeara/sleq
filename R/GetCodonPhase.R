@@ -28,8 +28,6 @@
 #' # DNA sequence is stored under the 
 #' malMtest <- GetCodonPhase(as.character(malMseq[[1]]))
 #' }
-#' @export
-
 
 GetCodonPhase <- function(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALSE){
 stopPosList<-list()
