@@ -18,9 +18,13 @@ CleanSeqs <- function(seq, seq.type="dna", cutoff=0.5){
         seq.mat <- as.matrix.alignment(seq)
         seq.mat.new <- seq.mat[,sites.to.keep]
     }
-    if(class(seq) == "matrix" || class(seq) == "seqalignment") {
+    if(class(seq) == "matrix") {
         seq.mat <- seq
         seq.mat.new <- seq.mat[,sites.to.keep]
+    }
+    if(class(seq) == "seqalignment"){
+        seq.mat <- seq
+        seq.mat.new <- subset.seqalignment(seq.mat, keep.site[,sites.to.keep])
     }
     return(seq.mat.new)
 }
