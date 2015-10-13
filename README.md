@@ -4,7 +4,8 @@
 A sleek package to deal with sequences in R. Joint O'Meara lab project, created in a hackathon.
 
 To install it:
-```library(devtools)
+```
+library(devtools)
 install_github(bomeara/sleq)
 ```
 
