@@ -23,11 +23,20 @@ GetCodonPhase(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALSE)
 }
 \examples{
 library(sleq)
- 
+
+### Example using consensus alignment 
 malMfile <- system.file("sequences/malM.fasta", package = "seqinr")
 malMseq <- read.fasta(malMfile)
 
 # DNA sequence is stored under the 
 malMtest <- GetCodonPhase(as.character(malMseq[[1]]))
+
+### Example using multiple sequences, and then creating a consensus alignment
+# Load in sample alignment
+fastaf <- system.file("sequences/Anouk.fasta", package = "seqinr")
+sample.fasta <- read.alignment(file = system.file("sequences/Anouk.fasta", package = "seqinr"), format = "fasta")
+
+# Get consensus
+Anouk <- consensus(sample.fasta, method = "majority")
 }
 
