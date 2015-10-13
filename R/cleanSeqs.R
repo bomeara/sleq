@@ -45,7 +45,7 @@ SiteMissing <- function(seq, seq.type="dna"){
         nucleo.table <- table(seq.mat[,i])
         res[i,1] <- i
         if(seq.type == "dna"){
-        res[i,2] <- sum(nucleo.table[names(nucleo.table) %in% c("a", "c", "g", "t", "r", "y", "s", "w", "k", "m", "b", "d", "h", "v", "n")])/dim(seq.mat)[1]
+            res[i,2] <- sum(nucleo.table[names(nucleo.table) %in% c("a", "c", "g", "t", "r", "y", "s", "w", "k", "m", "b", "d", "h", "v", "n")])/dim(seq.mat)[1]
         }
         if(seq.type == "rna"){
             res[i,2] <- sum(nucleo.table[names(nucleo.table) %in% c("a", "c", "g", "u", "r", "y", "s", "w", "k", "m", "b", "d", "h", "v", "n")])/dim(seq.mat)[1]
