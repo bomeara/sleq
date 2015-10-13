@@ -103,5 +103,5 @@ mdls.routine <- function(gene.names, subtrees.filename=NULL){
 	cat("Done.", "\n")
 }
 
-gene.names = c("its", "atpbrbcl", "rpl16", "rps16", "trnk", "trnlf", "trnsg", "atpb", "matk", "ndhf", "psba", "rbcl")
-mdls.routine(gene.names=gene.names, "camp.subtrees")
+#gene.names = c("its", "atpbrbcl", "rpl16", "rps16", "trnk", "trnlf", "trnsg", "atpb", "matk", "ndhf", "psba", "rbcl")
+#mdls.routine(gene.names=gene.names, "camp.subtrees")
