@@ -59,30 +59,42 @@ GetSequenceType <- function(x) {
 #' @param kill.site A vector of site positions to delete
 #' @param keep.taxon A vector of taxa (names or numbers) to retain
 #' @param kill.taxon A vector of taxa (names or numbers) to delete
-#' @param gene A vector of genes to retain
-#' @param pos A vector of codon positions to retain
-#' @param type A vector of types to retain
+#' @param keep.gene A vector of genes to retain
+#' @param kill.gene A vector of genes to delete
+#' @param keep.pos A vector of codon positions to retain
+#' @param kill.pos A vector of codon positions to delete
+#' @param keep.type A vector of types to retain
+#' @param kill.type A vector of types to delete
 #' @return A seqalignment object
 #' @details
 #' This will only filter on those arguments passed in: if you give it a list of keep.sites, it will include
 #' all taxa, for example. You can filter on more than one feature at a time. The keep.* or kill.* arguments
-#' let you filter for sites or taxa to keep or remove.
- subset.seqalignment <- function(x, keep.site=NULL, kill.site=NULL, keep.taxon=NULL, kill.taxon=NULL, gene=NULL, pos=NULL, type=NULL) {
+#' let you filter for objects to keep or remove.
+ subset.seqalignment <- function(x, keep.site=NULL, kill.site=NULL, keep.taxon=NULL, kill.taxon=NULL, keep.gene=NULL, kill.gene=NULL, keep.pos=NULL, kill.pos=NULL, keep.type=NULL, kill.type=NULL) {
  	cols.to.kill <- c()
  	if (!is.null(kill.site)) {
  		cols.to.kill <- c(cols.to.kill, kill.site)	
  	}
- 	if (!is.null(gene)) {
- 		cols.to.kill <- c(cols.to.kill, which(!(x$gene %in% gene)))
- 	}
- 	if (!is.null(pos)) {
- 		cols.to.kill <- c(cols.to.kill, which(!(x$pos %in% pos)))
- 	}
- 	if (!is.null(type)) {
- 		cols.to.kill <- c(cols.to.kill, which(!(x$type %in% type)))
- 	}
   	if (!is.null(keep.site)) {
  		cols.to.kill <- c(cols.to.kill, which(!(sequence(dim(x$sequences)[2]) %in% keep.site)))	
+ 	}
+ 	if (!is.null(keep.gene)) {
+ 		cols.to.kill <- c(cols.to.kill, which(!(x$gene %in% keep.gene)))
+ 	}
+ 	if (!is.null(kill.gene)) {
+ 		cols.to.kill <- c(cols.to.kill, which((x$gene %in% kill.gene)))
+ 	}
+ 	if (!is.null(keep.pos)) {
+ 		cols.to.kill <- c(cols.to.kill, which(!(x$pos %in% keep.pos)))
+ 	}
+ 	if (!is.null(kill.pos)) {
+ 		cols.to.kill <- c(cols.to.kill, which((x$pos %in% kill.pos)))
+ 	}
+ 	if (!is.null(keep.type)) {
+ 		cols.to.kill <- c(cols.to.kill, which(!(x$type %in% keep.type)))
+ 	}
+ 	if (!is.null(kill.type)) {
+ 		cols.to.kill <- c(cols.to.kill, which(!(x$type %in% keep.type)))
  	}
 	cols.to.kill <- unique(cols.to.kill)
 	if(length(cols.to.kill) > 0) {
