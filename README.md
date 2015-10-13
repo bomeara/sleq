@@ -16,12 +16,12 @@ install_github(bomeara/sleq)
 * We mostly kept to our goals of using unit testing and roxygen throughout. The main exception was some pre-existing code in this area from people's own work that was simply incorporated, with unit testing to be added later.
 * [Ten lab members committed code to this project](https://github.com/bomeara/sleq/pulse); for many, it was the first time using version control software, issue tracking, and the like.
 * The code now has:
-** ```seqalignment``` class: can be subset with brackets like a character matrix, but internally has slots for info on codon position, gene name, and data type. Tested.
-** Code to subset these objects in various ways.
-** Code to merge these objects, even with partial taxon overlap: combine COI and 18S alignments, for example.
-** Code to filter for areas of bad alignment.
-** Code to automatically find the reading frame that will minimize stop codons. Tested.
-** As well as other code that is less well tested, but still in development.
+  ```seqalignment``` class: can be subset with brackets like a character matrix, but internally has slots for info on codon position, gene name, and data type. Tested.
+  Code to subset these objects in various ways.
+  Code to merge these objects, even with partial taxon overlap: combine COI and 18S alignments, for example.
+  Code to filter for areas of bad alignment.
+  Code to automatically find the reading frame that will minimize stop codons. Tested.
+  As well as other code that is less well tested, but still in development.
 
 ## Archived info from the day of the hackathon
 This will be developed at an inhouse hackathon on Oct. 12, 2015. A secondary objective is to make useful code, but the primary objectives are learning and lab bonding. To that end:
