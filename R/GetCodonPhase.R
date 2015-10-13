@@ -7,7 +7,8 @@
 #' @usage GetCodonPhase(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALSE)
 #' 
 #' @param \code{DNA.seq} Vector of the consensus alignment of a DNA sequence. 
-#' @param \code{numcode} The NCBI genetic code number used for translation. By default, the standard genetic code (1) is used. See NCBI Genetic Code website for more details: \url{http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode=t}
+#' @param \code{numcode} The NCBI genetic code number used for translation. By default, the standard genetic code (1) is used. 
+#' See NCBI Genetic Code website for more details: \url{http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode=t}
 #' @param \code{NAstring} How to treat the translation of amino acids when there are ambiguous bases in codons. 
 #' @param \code{ambiguous} Indicate whether amibiguous bases are considered. Set as FALSE as a default.  #' 
 #' @details 
@@ -33,7 +34,6 @@
 #' # Get consensus
 #' Anouk <- consensus(sample.fasta, method = "majority")
 #' }
-
 GetCodonPhase <- function(DNA.seq, numcode = 1, NAstring = "X", ambiguous = FALSE){
 	stopPosList<-list()
 	translationList<-list()

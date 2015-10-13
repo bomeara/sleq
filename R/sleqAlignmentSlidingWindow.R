@@ -54,7 +54,7 @@ IdentifyBadSites <- function(sequences, width=6, threshold=3) {
 PurgeBadSites <- function(sequences, width=6, threshold=4, by.gene=TRUE) {
     if (by.gene==TRUE){
         vec<-vector()
-        for(index in unique(mice.seqalignment$genes)){
+        for(index in unique(sequences$genes)){
             bad.sites <- IdentifyBadSites(sequences[,which(sequences$genes==index)], width, threshold)
             final.matrix <- sequences
             vec<-append(vec, bad.sites)
@@ -74,7 +74,7 @@ PurgeBadSites <- function(sequences, width=6, threshold=4, by.gene=TRUE) {
     return(final.matrix)
 }
 
-PurgeBadSites(mice.seqalignment, width=6, threshold=2, by.gene=TRUE)
+#PurgeBadSites(mice.seqalignment, width=6, threshold=2, by.gene=TRUE)
 
 
 
