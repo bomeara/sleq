@@ -40,7 +40,7 @@ raw.sequences.A <- structure(c("a", "a", "a", "a", "a", "a", "a", "c", "a", "a",
     combined.sequences <- cbind(new.format.sequences.A, new.format.sequences.B)
     expect_equal(dim(combined.sequences)[2], dim(raw.sequences.A)[2]+dim(raw.sequences.B)[2])
     expect_equal(dim(combined.sequences)[1], length(unique(c(rownames(raw.sequences.A), rownames(raw.sequences.B)))))
-    expect_equal(unique(sort(c(rownames(raw.sequences.A), rownames(raw.sequences.B)))), sort(names(combined.sequences)))
+    expect_equal(unique(sort(c(rownames(raw.sequences.A ), rownames(raw.sequences.B)))), sort(names(combined.sequences)))
 })
 
 
