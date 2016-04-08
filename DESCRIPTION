@@ -4,7 +4,13 @@ Date: 2015-10-12
 Title: sleq
 Author: LABMATES TO LIST SOON Brian O'Meara <omeara.brian@gmail.com>
 Maintainer: Brian O'Meara <omeara.brian@gmail.com>
-Imports: ape, seqinr, zoo
-Description: Utilities for dealing with sequence data, especially for phylogenetics.
+Imports:
+    ape,
+    seqinr,
+    zoo
+Description: Utilities for dealing with sequence data, especially for
+    phylogenetics.
 License: GPL (>= 2)
-Suggests: testthat
+Suggests:
+    testthat
+RoxygenNote: 5.0.1
