@@ -1,10 +1,10 @@
-# Function that will summarize variability by site 
-#Comparing multiple sequences for a single taxon
-# Authors: Jenn Bosco and Rosana Zenil-Ferguson
-# Date: 10/12/15
-# INPUT sequences= Matrix of character sequences output of seqalignment ( seqalignmentoutput$sequences)
-#OUTPUT a list of matrices, one per site, summarizing the number and percentage of nucleotides.
-
+#' Function that will summarize variability by site comparing multiple sequences for a single taxon
+#' @param sequences Matrix of character sequences output of seqalignment ( seqalignmentoutput$sequences)
+#' @return a list of matrices, one per site, summarizing the number and percentage of nucleotides
+#' @examples
+#' \dontrun{
+#' SingleTaxonCompare<-function(sequences)
+#' }
 
 SingleTaxonCompare<-function(sequences){
 no.seqs<-dim(sequences)[1]
@@ -29,6 +29,10 @@ for(i in 1:no.sites){
 	aux[,1]<-how.manynucleotide
 	aux[,2]<-nucleotide.percentages
 	summary.seqmatrix[[i]]<-aux
+}
+weird.chars <- setdiff(sequences, c("a","c","g","t","n"))
+if (length(weird.chars)!=0) {
+	warning(paste("The sequences contain characters different from 'a', 'c', 'g', 't' or 'n'. They will be counted under 'n'. The characters in question are:", unique(weird.chars), sep=" "))
 }
 return(summary.seqmatrix)
 }

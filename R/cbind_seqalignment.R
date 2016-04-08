@@ -2,6 +2,7 @@
 #' Combines seqalignment objects and drops duplicate taxa 
 #' @param ... seqalignment objects
 #' @return A seqalignment object
+#' @export
 cbind.seqalignment <- function(...) {
 	raw.seq.objects <- list(...)
 # put intro warning stuff here	
