@@ -75,3 +75,38 @@ CountIdenticalSeqs <- function(seq) {
     length(which(duplicated(seq) == TRUE))
 }
 
+#' Toss taxa (rows) for which coverage across all genes is below a user-defined threshold. 
+#' @seealso \code{\link{CleanSeqs}} for removal of nucleotide sites with low coverage
+#' @param seq A character matrix or seqalignment object
+#' @param threshold A proportion deemed acceptable to keep a taxon
+#' @return A character matrix or seqalignment object
+#' @export
+TossTaxa <- function(seq, threshold=0.5){
+	rows.to.cull <- c()
+	if(class(seq)=="matrix"){
+		for(i in sequence(nrow(seq))){
+			temp <- sum(seq[i,]=="-")
+			if(temp/ncol(seq) > threshold){
+				rows.to.cull <- append(rows.to.cull, i)
+			}		
+		}
+		if(length(rows.to.cull) > 0) {
+			seq <- seq[-rows.to.cull,]
+		}
+
+	}
+
+	if(class(seq)=="seqalignment"){
+		for(i in sequence(nrow(seq))){
+			temp <- sum(seq$sequences[i,]=="-")
+			if(temp/ncol(seq$sequences) > threshold){
+				rows.to.cull <- append(rows.to.cull, i)
+
+			}
+		}
+				if(length(rows.to.cull) > 0) {
+					seq$sequences <- seq$sequences[-rows.to.cull,]
+				}
+	}	
+return(seq)
+}
