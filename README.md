@@ -8,8 +8,11 @@ To install it:
 library(devtools)
 install_github(bomeara/sleq)
 ```
+## March 2016 Hackathon
 
-## Hackathon results
+
+## Oct 2015 Hackathon
+### Results
 * One undergrad, five grad students, three postdocs, and a faculty member came up with issues over the course of a couple of lab meetings
 * Before the hackathon, we created an example function and a new class for sequence alignments
 * At the hackathon, we split into pairs and chose issues to work on
