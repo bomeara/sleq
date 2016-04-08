@@ -4,7 +4,7 @@
 \alias{GetNCBITaxa}
 \title{Create a data.frame with NCBI taxon id, name, and what kind of object this is}
 \usage{
-GetNCBITaxa(taxdir, name.type = "scientific name")
+GetNCBITaxa(taxdir = tempdir(), name.type = "scientific name")
 }
 \arguments{
 \item{taxdir}{The path to the folder that has the unziped nodes.dmp from NCBI}

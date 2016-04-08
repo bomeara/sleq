@@ -1,3 +1,15 @@
+#' Download the taxonomy from NCBI
+#' @param taxdir The directory to store the files in
+#' @export
+DownloadNCBITaxonomy <- function(taxdir=tempdir()) {
+	orig.wkdir <-getwd()
+	setwd(taxdir.parent)
+	curl::curl_download("ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz", "taxdump.tar.gz")
+	untar("taxdump.tar.gz")
+	setwd(orig.wkdir)
+	print(paste("Downloaded; files are in", taxdir))
+}
+
 #' From an NCBI taxonomy download, return a tree in igraphy graph format
 #' @param taxdir The path to the folder that has the unziped nodes.dmp from NCBI
 #' @return An igraph directed graph. It has labels for vertices that match the node ids from NCBI
@@ -19,7 +31,7 @@ ConvertNCBINodesToTree <- function(taxdir) {
 #' @export
 #' @details
 #' This is essentially a wrapper for CHNOSZ' functions
-GetNCBITaxa <- function(taxdir, name.type="scientific name") {
+GetNCBITaxa <- function(taxdir=tempdir(), name.type="scientific name") {
 	local.names <- CHNOSZ::getnames(taxdir)
 	if(!is.null(name.type)) {
 		local.names <- local.names[which(name.type == local.names$type), ]
