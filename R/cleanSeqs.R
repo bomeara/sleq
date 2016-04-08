@@ -61,7 +61,17 @@ SiteMissing <- function(seq, seq.type="dna"){
 #' Delete identical sequences
 #' @param seq A character matrix or seqalignment object.
 #' @return The same object with duplicate sequences removed
-#' @export 
+#' @export
 DeleteIdenticalSeqs <- function(seq) {
     seq[-duplicated(seq),]
 }
+
+
+#' Calculate number of identical sequences
+#' @param seq A character matrix or seqalignment object.
+#' @return Numeric value
+#' @export
+CountIdenticalSeqs <- function(seq) {
+    length(which(duplicated(seq) == TRUE))
+}
+
