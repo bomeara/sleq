@@ -1,7 +1,5 @@
-
-
 CountBasesAtSite <- function(x) {
-    length(unique(x))
+  length(unique(x))
 }
 
 #Over each column, counts the unique number of bases/DNA symbols per column
@@ -29,13 +27,14 @@ IdentifyBadSites <- function(sequences, width=6, threshold=3) {
 }
 
 
-#IdentifyBadSites(mice.seqalignment$sequences, width=6, threshold=2)# does ID bad sites work
+IdentifyBadSites(mice.seqalignment, width=6, threshold=2)# does ID bad sites work
 
 
-#' Removes poorly aligned sequences using a sliding window
+#' Removes poorly aligned areas of an alignment using a sliding window
 #' @param sequences matrix of sequences from an object of class seqalignment
 #' @param width integer for the width of the sliding window
 #' @param threshold value for the cutoof of average number of bases needed for removal from alignment
+#' @param by.gene logical as to whether to use sliding window to eliminate bad parts of an alignment by gene or for the whole alignment
 #PurgeBadSites <- function(sequences, width=6, threshold=4) {
 #  bad.sites <- IdentifyBadSites(sequences, width, threshold)
 #  final.matrix <- sequences
@@ -52,29 +51,58 @@ IdentifyBadSites <- function(sequences, width=6, threshold=3) {
 #remove bad sites and store in appendable object the good sites
 
 PurgeBadSites <- function(sequences, width=6, threshold=4, by.gene=TRUE) {
-    if (by.gene==TRUE){
-        vec<-vector()
-        for(index in unique(sequences$genes)){
-            bad.sites <- IdentifyBadSites(sequences[,which(sequences$genes==index)], width, threshold)
-            final.matrix <- sequences
-            vec<-append(vec, bad.sites)
-            if(length(bad.sites)>0) {
-                final.matrix <- sequences[,-bad.sites]
-            }
-        }
-        return(final.matrix)
-    }
-    else{
-        bad.sites <- IdentifyBadSites(sequences, width, threshold)
-        final.matrix <- sequences$sequences
-        if(length(bad.sites)>0) {
-            final.matrix <- sequences[,-bad.sites]
-        }
+  if (by.gene==TRUE){
+    vec<-vector()
+    for(index in unique(mice.seqalignment$genes)){
+      bad.sites <- IdentifyBadSites(sequences[,which(sequences$genes==index)], width, threshold)
+      final.matrix <- sequences
+      vec<-append(vec, bad.sites)
+      if(length(bad.sites)>0) {
+        final.matrix <- sequences[,-bad.sites]
+      }
     }
     return(final.matrix)
+  }
+  else{
+    bad.sites <- IdentifyBadSites(sequences, width, threshold)
+    final.matrix <- sequences$sequences
+    if(length(bad.sites)>0) {
+      final.matrix <- sequences[,-bad.sites]
+    }
+  }
+  return(final.matrix)
 }
 
-#PurgeBadSites(mice.seqalignment, width=6, threshold=2, by.gene=TRUE)
+pp<-PurgeBadSites(mice.seqalignment, width=6, threshold=2, by.gene=TRUE)
+
+mice.seqalignment
+mice.seqalignment$genes[483:965] = "2"
 
 
+PurgeBadSites <- function(sequences, width=6, threshold=3, by.gene=TRUE) {
+  if (by.gene==TRUE){
+    bad.sites.gene<-vector()
+    final.matrix<-sequences
+    gene.position <- 0
+    for(index in unique(sequences$genes)){
+      local.gene.seqalignment <- subset.seqalignment(sequences, keep.gene = index)
+      bad.sites<-IdentifyBadSites(local.gene.seqalignment, width = width, threshold = threshold)
+      bad.sites.gene<-append(bad.sites.gene, bad.sites + gene.position)
+      gene.position <- dim(local.gene.seqalignment)[2]
+    }
+    print(bad.sites.gene)
+    if(length(bad.sites)>0) {
+      final.matrix <- subset.seqalignment(sequences, kill.site = bad.sites.gene)#sequences[,-bad.sites]
+    }
+    return(final.matrix)
+  }
+  else{
+    bad.sites <- IdentifyBadSites(sequences, width, threshold)
+    final.matrix <- sequences$sequences
+    if(length(bad.sites)>0) {
+      final.matrix <- sequences[,-bad.sites]
+    }
+  }
+  return(final.matrix)
+}
 
